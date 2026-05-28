@@ -1,6 +1,18 @@
 "use client";
 
-import { useState } from "react";
+const [historico, setHistorico] = useState<Venda[]>([]);
+
+useEffect(() => {
+  const dadosSalvos = localStorage.getItem("historico");
+
+  if (dadosSalvos) {
+    setHistorico(JSON.parse(dadosSalvos));
+  }
+}, []);
+
+useEffect(() => {
+  localStorage.setItem("historico", JSON.stringify(historico));
+}, [historico]);
 
 interface Item {
   nome: string;
@@ -22,10 +34,10 @@ const itensBase: Omit<Item, "quantidade">[] = [
   { nome: "Kits", valorOrg: 150, valorVenda: 400 },
   { nome: "Nitro", valorOrg: 300, valorVenda: 1000 },
   { nome: "Full Kit Pack", valorOrg: 30000, valorVenda: 75000 },
-  { nome: "Fumo", valorOrg: 300, valorVenda: 20000 },
-  { nome: "Vidros", valorOrg: 180, valorVenda: 20000 },
-  { nome: "Neons", valorOrg: 950, valorVenda: 20000 },
-  { nome: "Xenons", valorOrg: 200, valorVenda: 20000 },
+  { nome: "Fumo", valorOrg: 3000, valorVenda: 20000 },
+  { nome: "Vidros", valorOrg: 3000, valorVenda: 20000 },
+  { nome: "Neons", valorOrg: 3000, valorVenda: 20000 },
+  { nome: "Xenons", valorOrg: 3000, valorVenda: 20000 },
 ];
 
 export default function OficinaApp() {
